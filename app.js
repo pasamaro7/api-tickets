@@ -24,7 +24,7 @@ app.delete() borrado
 app.get('/', (req, res) => {
     res.send('Api tickets funcionando');
 });
-app.get('/api/tickets', (req, res) => {
+app.get('/api/ticket', (req, res) => {
     res.send(ticket);
 });
 
@@ -41,7 +41,7 @@ app.get('/api/ticket/:id', (req, res) => {
 })
 
 //Función para  petición Post
-app.post('/api/ticket_nuevo', (req, res) => {
+app.post('/api/ticket', (req, res) => {
     //Validación con el paquete Joi mandando los datos por la función validarTicket
     const { error, value } = validarTicket(req.body.url, req.body.nombreSitio, req.body.falla, req.body.fecha, req.body.status);
     if (!error) {
@@ -62,7 +62,7 @@ app.post('/api/ticket_nuevo', (req, res) => {
     }
 });
 //Función para  petición Put
-app.put('/api/ticket_modifica/:id', (req, res) => {
+app.put('/api/ticket/:id', (req, res) => {
     //se hace la búsqueda del ticket por medio de su id
     let ticket = existeTicket(req.params.id); //busca el ticket en el arreglo
     //si no lo encuentra manda error
@@ -89,7 +89,7 @@ app.put('/api/ticket_modifica/:id', (req, res) => {
 
 
 //Función para  petición Delete
-app.delete('/api/ticket_borra/:id', (req, res) => {
+app.delete('/api/ticket/:id', (req, res) => {
     let ticket_id = existeTicket(req.params.id); //busca el ticket en el arreglo
     if (!ticket_id) {
         res.status(404).send('Ticket no encontrado');
